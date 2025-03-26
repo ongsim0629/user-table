@@ -1,7 +1,24 @@
+import { useEffect, useState } from 'react';
+import { storage } from './services/storage/';
+
 function App() {
+  const [test, setTest] = useState('');
+
+  useEffect(() => {
+    const test_value = storage.getValue();
+    setTest(test_value);
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    storage.setValue(val);
+    setTest(val);
+  };
+
   return (
     <div>
-      <h1>회원 관리 프로젝트</h1>
+      <p>{test || '없음'}</p>
+      <input value={test} onChange={handleChange} />
     </div>
   );
 }
