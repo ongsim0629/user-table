@@ -1,19 +1,42 @@
 import { Storage } from './types';
+import { Member } from '../../features/members/models/Field';
 
-// 로컬 스토리지는 키,값 쌍으로 이루어진다.
 export class LocalStorage implements Storage {
   private key: string;
 
-  constructor(key: string = 'default-key') {
+  constructor(key: string = 'members') {
     this.key = key;
   }
 
-  getValue(): string {
-    return localStorage.getItem(this.key) || '';
+  getValue(): Member[] {
+    const raw = localStorage.getItem(this.key);
+    try {
+      if (!raw) return [];
+
+      const parsed = JSON.parse(raw);
+      return parsed.map((member: Member) => ({
+        ...member,
+        joinDate: member.joinDate ? new Date(member.joinDate) : undefined,
+      }));
+    } catch (error) {
+      console.error('Parsing error:', error);
+      return [];
+    }
   }
 
-  setValue(value: string): void {
-    localStorage.setItem(this.key, value);
+  setValue(value: Member[]): void {
+    try {
+      const serializable = value.map((member) => ({
+        ...member,
+        joinDate: member.joinDate instanceof Date ? member.joinDate.toISOString() : member.joinDate,
+      }));
+
+      const stringified = JSON.stringify(serializable);
+
+      localStorage.setItem(this.key, stringified);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   deleteValue(): void {

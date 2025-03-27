@@ -3,11 +3,13 @@ import { Modal, Form, Input, Select, Checkbox } from 'antd';
 import { getFields } from '../../features/members/utils/getFields';
 import { JOB_OPTIONS } from '../../shared/constants/job';
 import { CustomDatePicker } from './DatePicker';
+import { useMembers } from '../../features/members/hooks/useMembers';
 
 export default function CustomModal({ open, onClose }) {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const fields = getFields();
+  const { addMember } = useMembers();
 
   // 필수 값 검사
   const handleFormChange = (): void => {
@@ -24,7 +26,13 @@ export default function CustomModal({ open, onClose }) {
     form
       .validateFields()
       .then((values) => {
-        console.log(values);
+        const newMember = {
+          ...values,
+          joinDate: new Date(values.joinDate),
+        };
+
+        addMember(newMember);
+
         form.resetFields();
         onClose();
       })

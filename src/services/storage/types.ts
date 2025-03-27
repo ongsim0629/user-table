@@ -1,5 +1,7 @@
+import type { Member } from '../../features/members/models/Field';
+
 export interface Storage {
-  getValue(): string;
-  setValue: (value: string) => void;
+  getValue(): Member[];
+  setValue(value: Member[]): void;
   deleteValue(): void;
 }

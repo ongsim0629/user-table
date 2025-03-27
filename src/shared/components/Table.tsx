@@ -5,10 +5,10 @@ import { CustomDropdown } from './Dropdown';
 import { Member } from '../../features/members/models/Field';
 import { getFields } from '../../features/members/utils/getFields';
 import { getFilters } from '../../features/members/utils/getFilters';
-import { getInitialRecords } from '../../features/members/utils/getInitialRecords';
+import { useMembers } from '../../features/members/hooks/useMembers';
 
 export default function MemberTable() {
-  const data = getInitialRecords();
+  const { members } = useMembers();
   const fields = getFields();
   const columns: ColumnsType<Member> = [
     ...fields.map((field) => ({
@@ -21,7 +21,7 @@ export default function MemberTable() {
         return value;
       },
       // 필터
-      filters: getFilters(data, field.key),
+      filters: getFilters(members, field.key),
     })),
     // 케밥 메뉴
     {
@@ -33,7 +33,7 @@ export default function MemberTable() {
     <Table
       //체크박스 표시용 (용도 뭔지 더 봐야함)
       rowSelection={{}}
-      dataSource={data.map((d, i) => ({ ...d, key: i.toString() }))}
+      dataSource={members.map((d, i) => ({ ...d, key: i.toString() }))}
       columns={columns}
       pagination={false}
     />

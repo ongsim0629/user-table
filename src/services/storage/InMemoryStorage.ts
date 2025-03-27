@@ -1,17 +1,18 @@
 import { Storage } from './types';
+import { Member } from '../../features/members/models/Field';
 
 export class InMemoryStorage implements Storage {
-  private value = '';
+  private value: Member[] = [];
 
-  getValue(): string {
+  getValue(): Member[] {
     return this.value;
   }
 
-  setValue(value: string): void {
+  setValue(value: Member[]): void {
     this.value = value;
   }
 
   deleteValue(): void {
-    this.value = '';
+    this.value = [];
   }
 }
