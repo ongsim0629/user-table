@@ -19,11 +19,19 @@ export function useMembers() {
     setMembers(updated);
     storage.setValue(updated);
   };
+  
+  const updateMember = (index: number, updated: Member) => {
+    const newMembers = [...members];
+    newMembers[index] = updated;
+    setMembers(newMembers);
+    storage.setValue(newMembers);
+  };
 
   return {
     members,
     setMembers,
     addMember,
     deleteMember,
+    updateMember,
   };
 }

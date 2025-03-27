@@ -4,12 +4,34 @@ import { getFields } from '../../features/members/utils/getFields';
 import { JOB_OPTIONS } from '../../shared/constants/job';
 import { CustomDatePicker } from './DatePicker';
 import { useMembers } from '../../features/members/hooks/useMembers';
+import { Member } from '../../features/members/models/Field';
+import { useEffect } from 'react';
 
-export default function CustomModal({ open, onClose }) {
+interface CustomModalProps {
+  open: boolean;
+  onClose: () => void;
+  initialValues?: Member;
+  editIndex?: number;
+}
+
+export default function CustomModal({ open, onClose, initialValues, editIndex }: CustomModalProps) {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const fields = getFields();
-  const { addMember } = useMembers();
+  const { addMember, updateMember } = useMembers();
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue({
+        ...initialValues,
+        joinDate: initialValues.joinDate,
+      });
+      setDisabled(false); // 수정 모드에서는 활성화
+    } else {
+      form.resetFields();
+      setDisabled(true); // 추가 모드에서는 비활성화로 초기화
+    }
+  }, [initialValues, form]);
 
   // 필수 값 검사
   const handleFormChange = (): void => {
@@ -17,7 +39,7 @@ export default function CustomModal({ open, onClose }) {
       .filter((field) => field.required)
       .every((field) => {
         const value = form.getFieldValue(field.key);
-        return value !== undefined;
+        return value !== undefined && value !== null;
       });
     setDisabled(!filledRequired);
   };
@@ -31,7 +53,11 @@ export default function CustomModal({ open, onClose }) {
           joinDate: new Date(values.joinDate),
         };
 
-        addMember(newMember);
+        if (editIndex !== undefined) {
+          updateMember(editIndex, newMember);
+        } else {
+          addMember(newMember);
+        }
 
         form.resetFields();
         onClose();

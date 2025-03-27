@@ -7,7 +7,11 @@ import { getFields } from '../../features/members/utils/getFields';
 import { getFilters } from '../../features/members/utils/getFilters';
 import { useMembers } from '../../features/members/hooks/useMembers';
 
-export default function MemberTable() {
+interface Props {
+  onEdit: (index: number, member: Member) => void;
+}
+
+export default function MemberTable({ onEdit }: Props) {
   const { members, deleteMember } = useMembers();
   const fields = getFields();
   const columns: ColumnsType<Member> = [
@@ -25,7 +29,10 @@ export default function MemberTable() {
     })),
     // 케밥 메뉴
     {
-      render: (_, record, index) => <CustomDropdown onDelete={() => deleteMember(index)} />,
+      key: 'actions',
+      render: (_, record, index) => (
+        <CustomDropdown onDelete={() => deleteMember(index)} onEdit={() => onEdit(index, record)} />
+      ),
     },
   ];
 
