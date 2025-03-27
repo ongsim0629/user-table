@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { storage } from './services/storage/';
 import MemberTable from './shared/components/Table';
-import AddMemberModal from './shared/components/Modal';
+import CustomModal from './shared/components/Modal';
 import { Layout, Button } from 'antd';
 
 const { Header, Content } = Layout;
@@ -39,7 +39,7 @@ function App() {
         <input value={test} onChange={handleChange} />
       </div>
 
-      <AddMemberModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <CustomModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </Layout>
   );
 }

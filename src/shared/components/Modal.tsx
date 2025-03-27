@@ -1,28 +1,89 @@
-import { Modal, Form, Input } from 'antd';
+import { useState } from 'react';
+import { Modal, Form, Input, Select, Checkbox } from 'antd';
+import { getFields } from '../../features/members/utils/getFields';
+import { JOB_OPTIONS } from '../../shared/constants/job';
+import { CustomDatePicker } from './DatePicker';
 
-export default function AddMemberModal({ open, onClose }) {
+export default function CustomModal({ open, onClose }) {
+  const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
+  const fields = getFields();
+
+  // 필수 값 검사
+  const handleFormChange = (): void => {
+    const filledRequired = fields
+      .filter((field) => field.required)
+      .every((field) => {
+        const value = form.getFieldValue(field.key);
+        return value !== undefined;
+      });
+    setDisabled(!filledRequired);
+  };
 
   const handleSubmit = () => {
-    form.validateFields().then((values) => {
-      console.log('추가할 데이터:', values);
-      form.resetFields();
-      onClose();
-    });
+    form
+      .validateFields()
+      .then((values) => {
+        console.log(values);
+        form.resetFields();
+        onClose();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const renderInput = (type: string) => {
+    switch (type) {
+      case 'text':
+        return <Input placeholder="Input" />;
+      case 'textarea':
+        return <Input.TextArea placeholder="Textarea" />;
+      case 'select':
+        return (
+          <Select>
+            {JOB_OPTIONS.map((job) => (
+              <Select.Option key={job} value={job}>
+                {job}
+              </Select.Option>
+            ))}
+          </Select>
+        );
+      case 'date':
+        return <CustomDatePicker />;
+      case 'checkbox':
+        return <Checkbox />;
+      default:
+        return null;
+    }
   };
 
   return (
-    <Modal title="회원 추가" open={open} onOk={handleSubmit} onCancel={onClose}>
-      <Form layout="vertical" form={form}>
-        <Form.Item label="이름" name="name" rules={[{ required: true, message: '이름은 필수입니다.' }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item label="주소" name="address">
-          <Input />
-        </Form.Item>
-        <Form.Item label="메모" name="memo">
-          <Input.TextArea />
-        </Form.Item>
+    <Modal
+      title="회원 추가"
+      open={open}
+      onOk={handleSubmit}
+      onCancel={() => {
+        form.resetFields();
+        onClose();
+      }}
+      okText="저장"
+      cancelText="취소"
+      okButtonProps={{ disabled }}
+    >
+      <Form layout="vertical" form={form} onFieldsChange={handleFormChange}>
+        {fields.map((field) => (
+          <Form.Item
+            name={field.key}
+            key={field.key}
+            label={field.label}
+            rules={field.required ? [{ required: true }] : []}
+            initialValue={field.type === 'checkbox' ? false : undefined}
+            valuePropName={field.type === 'checkbox' ? 'checked' : 'value'}
+          >
+            {renderInput(field.type)}
+          </Form.Item>
+        ))}
       </Form>
     </Modal>
   );
