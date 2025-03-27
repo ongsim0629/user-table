@@ -8,7 +8,7 @@ import { getFilters } from '../../features/members/utils/getFilters';
 import { useMembers } from '../../features/members/hooks/useMembers';
 
 export default function MemberTable() {
-  const { members } = useMembers();
+  const { members, deleteMember } = useMembers();
   const fields = getFields();
   const columns: ColumnsType<Member> = [
     ...fields.map((field) => ({
@@ -25,13 +25,12 @@ export default function MemberTable() {
     })),
     // 케밥 메뉴
     {
-      render: () => <CustomDropdown />,
+      render: (_, record, index) => <CustomDropdown onDelete={() => deleteMember(index)} />,
     },
   ];
 
   return (
     <Table
-      //체크박스 표시용 (용도 뭔지 더 봐야함)
       rowSelection={{}}
       dataSource={members.map((d, i) => ({ ...d, key: i.toString() }))}
       columns={columns}

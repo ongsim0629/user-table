@@ -1,19 +1,24 @@
-import { Dropdown } from 'antd';
+import { Dropdown, MenuProps } from 'antd';
 // 케밥 메뉴
 import { MoreOutlined } from '@ant-design/icons';
 
-export function CustomDropdown() {
+interface Props {
+  onDelete: () => void;
+}
+
+export function CustomDropdown({ onDelete }: Props) {
+  const items: MenuProps['items'] = [
+    { key: 'edit', label: '수정' },
+    {
+      key: 'delete',
+      label: '삭제',
+      danger: true,
+      onClick: () => onDelete(),
+    },
+  ];
+
   return (
-    <Dropdown
-      trigger={['click']}
-      menu={{
-        items: [
-          { key: 'edit', label: '수정' },
-          // 글자색 빨간색 되게 나중에 css 작업
-          { key: 'delete', label: '삭제' },
-        ],
-      }}
-    >
+    <Dropdown trigger={['click']} menu={{ items }}>
       <MoreOutlined style={{ cursor: 'pointer' }} />
     </Dropdown>
   );

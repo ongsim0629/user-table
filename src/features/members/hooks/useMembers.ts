@@ -13,9 +13,17 @@ export function useMembers() {
     storage.setValue(updated);
   };
 
+  const deleteMember = (index: number) => {
+    const updated = [...members];
+    updated.splice(index, 1);
+    setMembers(updated);
+    storage.setValue(updated);
+  };
+
   return {
     members,
     setMembers,
     addMember,
+    deleteMember,
   };
 }
