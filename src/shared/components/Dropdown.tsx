@@ -1,7 +1,7 @@
 import { Dropdown, MenuProps, Modal, message } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import { theme } from '../styles/theme';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   onDelete: () => void;

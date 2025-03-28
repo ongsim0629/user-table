@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Modal, Form, Input, Select, Checkbox } from 'antd';
+import type { MessageInstance } from 'antd/es/message/interface';
 import { getFields } from '../../features/members/utils/getFields';
 import { JOB_OPTIONS } from '../../shared/constants/job';
 import { CustomDatePicker } from './DatePicker';
@@ -12,7 +13,7 @@ interface CustomModalProps {
   onClose: () => void;
   initialValues?: Member;
   editIndex?: number;
-  messageApi: string;
+  messageApi: MessageInstance;
 }
 
 export default function CustomModal({ open, onClose, initialValues, editIndex, messageApi }: CustomModalProps) {
@@ -82,6 +83,7 @@ export default function CustomModal({ open, onClose, initialValues, editIndex, m
       case 'select':
         return (
           <Select
+            dropdownMatchSelectWidth={false}
             style={{
               ...theme.select.default,
             }}

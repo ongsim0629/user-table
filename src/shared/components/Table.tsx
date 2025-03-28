@@ -75,6 +75,9 @@ export default function MemberTable({ onEdit }: Props) {
       }),
 
       render: (value: Member[typeof field.key]) => {
+        if (value == null) {
+          return '';
+        }
         if (field.type === 'date') {
           if (value instanceof Date) {
             return value.toISOString().slice(0, 10);
