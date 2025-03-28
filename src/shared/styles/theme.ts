@@ -162,6 +162,7 @@ export const theme = {
       fontSize: tokens.font.size,
     },
     dropdown: {
+      minWidth: '198px',
       backgroundColor: '#ffffff',
       color: tokens.color.primary,
       borderRadius: tokens.radius.md,

@@ -19,36 +19,38 @@ body {
   border-left: 1px solid var(--Table-colorSplit, #0000000f);
 }
 
-.ant-form-item-required::before {
+.ant-form-item-label > label.ant-form-item-required::before {
   content: none !important;
 }
 
-.ant-form-item-required::after {
+/* 2) 대신 오른쪽에 별(*) 넣기 */
+.ant-form-item-label > label.ant-form-item-required::after {
   content: '*' !important;
-  color: #ff4d4f !important;
-  font-size: 16px !important;
-  margin-right: 4px !important;
-  display: inline-block !important;
+  color: #ff4d4f; /* 빨간색 */
+  margin-left: 4px; /* 별과 텍스트 사이 간격 */
+  font-size: 14px; /* 원하는 크기 */
+  display: inline-block; /* 별이 정상적으로 표시되도록 */
 }
 
-.css-dev-only-do-not-override-1a3rktk
-  .ant-form-vertical
-  .ant-form-item:not(.ant-form-item-horizontal)
-  .ant-form-item-label
-  > label::after,
-.css-dev-only-do-not-override-1a3rktk
-  .ant-form-vertical
-  .ant-form-item:not(.ant-form-item-horizontal)
-  .ant-col-24.ant-form-item-label
-  > label::after,
-.css-dev-only-do-not-override-1a3rktk
-  .ant-form-vertical
-  .ant-form-item:not(.ant-form-item-horizontal)
-  .ant-col-xl-24.ant-form-item-label
-  > label::after {
-  visibility: visible;
+.ant-select-arrow .anticon-down svg {
+  color: #000 !important;
+  transition: color 0.2s;
 }
-.css-dev-only-do-not-override-1a3rktk
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-arrow .anticon-down svg {
+  color: #739fff !important;
+}
+
+.ant-select:hover .ant-select-suffix .anticon-down svg {
+  color: #739fff !important;
+}
+
+.ant-select:hover {
+  color: #739fff;
+}
+
+.label
+  .css-dev-only-do-not-override-1a3rktk
   .ant-form-vertical
   .ant-form-item:not(.ant-form-item-horizontal)
   .ant-form-item-label

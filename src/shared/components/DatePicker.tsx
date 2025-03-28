@@ -20,7 +20,6 @@ export function CustomDatePicker({ value, onChange, ...rest }: Props) {
       }}
       showToday={false}
       style={{ width: theme.datepicker.width }}
-      placeholder="날짜 선택"
       {...rest}
     />
   );
