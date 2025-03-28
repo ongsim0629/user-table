@@ -1,5 +1,6 @@
 import { FieldKey, FieldType } from '../../../shared/constants/fields';
 import { JobOption } from '../../../shared/constants/job';
+import type { Dayjs } from 'dayjs';
 
 export interface Field {
   key: FieldKey;
@@ -12,7 +13,7 @@ export interface Member {
   name: string;
   address: string;
   memo: string;
-  joinDate: Date;
+  joinDate: Dayjs;
   job: JobOption;
   email: boolean;
 }

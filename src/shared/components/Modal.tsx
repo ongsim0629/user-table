@@ -55,7 +55,7 @@ export default function CustomModal({ open, onClose, initialValues, editIndex, m
       .then((values) => {
         const newMember = {
           ...values,
-          joinDate: new Date(values.joinDate),
+          joinDate: values.joinDate,
         };
 
         if (editIndex !== undefined) {
