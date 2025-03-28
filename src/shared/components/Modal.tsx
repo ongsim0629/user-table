@@ -143,6 +143,7 @@ export default function CustomModal({ open, onClose, initialValues, editIndex, m
       style={theme.modal}
       width={theme.modal.width}
       bodyStyle={theme.modal.body}
+      className="custom-modal"
     >
       <div style={theme.modal.formWrapper}>
         <Form form={form} onFieldsChange={handleFormChange} layout={theme.form.layout}>
