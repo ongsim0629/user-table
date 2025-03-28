@@ -4,6 +4,11 @@ import { storage } from '../../../services/storage';
 import type { Member } from '../models/Field';
 import { serializeMember } from '../utils/transform';
 
+/**
+ * useMembers 훅은 회원 목록을 관리하기 위한 커스텀 훅입니다.
+ * 추가, 삭제, 수정 등의 기능을 제공합니다.
+ * 상태는 jotai의 atom을 통해 관리되며, 변경 사항은 storage에 동기화됩니다.
+ */
 export function useMembers() {
   const [members, setMembers] = useAtom(membersAtom);
 
