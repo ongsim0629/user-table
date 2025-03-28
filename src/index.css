@@ -23,13 +23,28 @@ body {
   content: none !important;
 }
 
-/* 2) 대신 오른쪽에 별(*) 넣기 */
 .ant-form-item-label > label.ant-form-item-required::after {
-  content: '*' !important;
-  color: #ff4d4f; /* 빨간색 */
-  margin-left: 4px; /* 별과 텍스트 사이 간격 */
-  font-size: 14px; /* 원하는 크기 */
-  display: inline-block; /* 별이 정상적으로 표시되도록 */
+  visibility: visible !important;
+  content: '*';
+  color: #ff4d4f;
+  margin-left: 4px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.custom-modal .ant-modal-content {
+  padding: 0 !important;
+}
+
+.custom-modal .ant-modal-header {
+  border-bottom: 1px solid #d9d9d9 !important;
+  padding: 10px 24px !important;
+}
+
+.custom-modal .ant-modal-footer {
+  border-top: 1px solid #d9d9d9 !important;
+  padding: 10px 24px !important;
+  background-color: #0000000f;
 }
 
 .ant-select-arrow .anticon-down svg {

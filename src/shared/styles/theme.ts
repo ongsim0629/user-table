@@ -60,7 +60,7 @@ export const theme = {
       paddingRight: 16,
       paddingBottom: 8,
       paddingLeft: 16,
-      borderBottom: `1px solid var(--colorBorderSecondary, #F0F0F0)`,
+      borderBottom: `1px solid ${tokens.color.split}`,
       title: {
         fontFamily: tokens.font.family,
         fontWeight: 600,
@@ -77,47 +77,20 @@ export const theme = {
     body: {
       width: '100%',
       padding: '0px 20px',
-      boxSizing: 'border-box' as const, // ✅ 수정
+      boxSizing: 'border-box' as const,
+    },
+    footer: {
+      width: '100%',
+      padding: '8px 16px',
+      paddingTop: 16,
+      borderTop: `1px solid ${tokens.color.split}`,
+      display: 'flex',
+      justifyContent: 'flex-end',
+      gap: 8,
     },
     formWrapper: {
       width: '100%',
       padding: 0,
-    },
-    formElement: {
-      width: 472,
-      height: 72,
-      labelHorizontal: {
-        width: 40,
-        height: 32,
-        gap: 4,
-      },
-      labelText: {
-        fontFamily: tokens.font.family,
-        fontWeight: 600,
-        fontSize: 16,
-        lineHeight: '24px',
-        letterSpacing: 0,
-        textAlign: 'right',
-      },
-      requiredAsterisk: {
-        width: 8,
-        height: 24,
-        fontFamily: tokens.font.family,
-        fontWeight: 400,
-        fontSize: 16,
-        lineHeight: '24px',
-        letterSpacing: 0,
-        color: tokens.color.error,
-      },
-      input: {
-        width: 472,
-        height: 32,
-        gap: 10,
-        paddingRight: 12,
-        paddingLeft: 12,
-        borderRadius: tokens.radius.sm,
-        border: `1px solid ${tokens.color.border}`,
-      },
     },
   },
 
