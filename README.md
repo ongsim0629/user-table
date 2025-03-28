@@ -1,4 +1,4 @@
-# 🧩 프로젝트 개요
+![image](https://github.com/user-attachments/assets/65f9b64e-5cda-476e-b820-16e2e8172e69)# 🧩 프로젝트 개요
 
 ### 회원 정보를 관리하는 Single Page Application
 
@@ -113,3 +113,26 @@ VITE_STORAGE_TYPE=local-storage
 | 필터 기능 | 조건 필터를 이용해서 필드 별로 필터링 가능 |
 
 # 📸 화면 미리보기
+
+### 1. 초기 화면
+![image](https://github.com/user-attachments/assets/fc8af2e4-23b9-47b7-a16c-0c2670392712)
+
+### 2. 회원 추가
+![image](https://github.com/user-attachments/assets/8665a5c7-2874-4d8c-838f-917faca59019)
+![image](https://github.com/user-attachments/assets/4df4a0ab-60be-4a80-9b2c-b914e90666c8)
+![image](https://github.com/user-attachments/assets/9d5e195d-5f64-4254-86d6-c852fce0854e)
+
+### 3. 회원 수정
+![image](https://github.com/user-attachments/assets/0f8f439b-1852-4469-b170-f2db86567088)
+![image](https://github.com/user-attachments/assets/889f745b-65b2-4208-881c-9fd169fbbd47)
+![image](https://github.com/user-attachments/assets/62c9c29c-dd20-425d-9771-e83a42c9b413)
+
+### 4. 회원 삭제
+![image](https://github.com/user-attachments/assets/e7e258bc-8560-4793-a44a-a493425444bf)
+![image](https://github.com/user-attachments/assets/f6785ef4-e66b-4cc1-9ff0-d8df1db2f88d)
+![image](https://github.com/user-attachments/assets/5b620747-0c82-4df8-8dd1-2e02913cce70)
+
+### 5. 필터
+![image](https://github.com/user-attachments/assets/94e10baa-0685-4de2-91e6-84c36d502fb2)
+![image](https://github.com/user-attachments/assets/5abc1daa-611b-491b-8de1-7498f4fac443)
+
