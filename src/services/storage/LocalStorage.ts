@@ -1,39 +1,28 @@
 import { Storage } from './types';
-import { Member } from '../../features/members/models/Field';
+import { SerializedMember } from '../../features/members/utils/transform';
 
 export class LocalStorage implements Storage {
+  // local-storage는 키,값 쌍으로 데이터를 저장하기 때문에 키가 필요합니다.
   private key: string;
-
+  // 키의 기본값으로 'members'를 사용합니다.
   constructor(key: string = 'members') {
     this.key = key;
   }
 
-  getValue(): Member[] {
+  getValue(): SerializedMember[] {
     const raw = localStorage.getItem(this.key);
+    if (!raw) return [];
     try {
-      if (!raw) return [];
-
-      const parsed = JSON.parse(raw);
-      return parsed.map((member: Member) => ({
-        ...member,
-        joinDate: member.joinDate ? new Date(member.joinDate) : undefined,
-      }));
+      return JSON.parse(raw) as SerializedMember[];
     } catch (error) {
       console.error('Parsing error:', error);
       return [];
     }
   }
 
-  setValue(value: Member[]): void {
+  setValue(value: SerializedMember[]): void {
     try {
-      const serializable = value.map((member) => ({
-        ...member,
-        joinDate: member.joinDate instanceof Date ? member.joinDate.toISOString() : member.joinDate,
-      }));
-
-      const stringified = JSON.stringify(serializable);
-
-      localStorage.setItem(this.key, stringified);
+      localStorage.setItem(this.key, JSON.stringify(value));
     } catch (error) {
       console.error(error);
     }

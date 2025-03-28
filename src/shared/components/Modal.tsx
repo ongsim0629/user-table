@@ -22,19 +22,20 @@ export default function CustomModal({ open, onClose, initialValues, editIndex, m
   const fields = getFields();
   const { addMember, updateMember } = useMembers();
 
+  // 초기값 설정
   useEffect(() => {
     if (initialValues) {
       form.setFieldsValue({
         ...initialValues,
         joinDate: initialValues.joinDate,
       });
-      setDisabled(false); // 수정 모드에서는 활성화
+      setDisabled(false);
     } else {
       form.resetFields();
       form.setFieldsValue({
         job: '개발자',
       });
-      setDisabled(true); // 추가 모드에서는 비활성화로 초기화
+      setDisabled(true);
     }
   }, [initialValues, form]);
 
@@ -55,7 +56,7 @@ export default function CustomModal({ open, onClose, initialValues, editIndex, m
       .then((values) => {
         const newMember = {
           ...values,
-          joinDate: new Date(values.joinDate),
+          joinDate: values.joinDate,
         };
 
         if (editIndex !== undefined) {

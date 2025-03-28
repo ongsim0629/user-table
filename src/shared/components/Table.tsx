@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { CustomDropdown } from './Dropdown';
 import { theme } from '../styles/theme';
 import React from 'react';
+import dayjs from 'dayjs';
 
 import { Member } from '../../features/members/models/Field';
 import { getFields } from '../../features/members/utils/getFields';
@@ -79,12 +80,9 @@ export default function MemberTable({ onEdit }: Props) {
           return '';
         }
         if (field.type === 'date') {
-          if (value instanceof Date) {
-            return value.toISOString().slice(0, 10);
-          }
-          if (typeof value === 'string' || typeof value === 'number') {
-            const parsed = new Date(value);
-            return isNaN(parsed.getTime()) ? '' : parsed.toISOString().slice(0, 10);
+          if (typeof value !== 'boolean') {
+            const date = dayjs(value);
+            return date.isValid() ? date.format('YYYY-MM-DD') : '';
           }
           return '';
         }

@@ -1,14 +1,14 @@
 import { Storage } from './types';
-import { Member } from '../../features/members/models/Field';
+import { SerializedMember } from '../../features/members/utils/transform';
 
 export class InMemoryStorage implements Storage {
-  private value: Member[] = [];
+  private value: SerializedMember[] = [];
 
-  getValue(): Member[] {
+  getValue(): SerializedMember[] {
     return this.value;
   }
 
-  setValue(value: Member[]): void {
+  setValue(value: SerializedMember[]): void {
     this.value = value;
   }
 

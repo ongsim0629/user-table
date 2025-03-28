@@ -1,7 +1,7 @@
-import type { Member } from '../../features/members/models/Field';
+import type { SerializedMember } from '../../features/members/utils/transform';
 
 export interface Storage {
-  getValue(): Member[];
-  setValue(value: Member[]): void;
+  getValue(): SerializedMember[];
+  setValue(value: SerializedMember[]): void;
   deleteValue(): void;
 }
