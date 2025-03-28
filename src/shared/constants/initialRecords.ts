@@ -1,4 +1,4 @@
-import { Member } from '@/features/members/models/Field';
+import { Member } from '../../features/members/models/Field';
 import { JOB_OPTIONS } from './job';
 
 export const INITIAL_RECORDS: Member[] = [

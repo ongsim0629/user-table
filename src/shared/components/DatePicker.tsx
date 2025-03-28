@@ -1,21 +1,27 @@
 import { DatePicker } from 'antd';
 import type { DatePickerProps } from 'antd';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { theme } from '../styles/theme';
 
-interface Props extends DatePickerProps {
-  // 설계할 때 Date로 받아서 일단 구현 하는데 나중에 dayjs로 리팩토링
-  value: Date;
+interface Props extends Omit<DatePickerProps, 'value' | 'onChange' | 'onOk'> {
+  value: Date | null;
   onChange?: (date: Date | null) => void;
 }
 
-export function CustomDatePicker({ value, onChange }: Props) {
+export function CustomDatePicker({ value, onChange, ...rest }: Props) {
   return (
     <DatePicker
-      value={dayjs(value)}
+      value={value ? dayjs(value) : null}
       onChange={(date) => {
-        if (onChange) onChange(date ? date.toDate() : null);
+        onChange?.(date ? date.toDate() : null);
+      }}
+      onOk={(date: Dayjs | null) => {
+        onChange?.(date ? date.toDate() : null);
       }}
       showToday={false}
+      style={{ width: theme.datepicker.width }}
+      placeholder="날짜 선택"
+      {...rest}
     />
   );
 }

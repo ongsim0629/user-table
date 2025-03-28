@@ -1,0 +1,78 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+body {
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    sans-serif;
+}
+
+.ant-table-wrapper td.ant-table-selection-column {
+  border-right: 1px solid var(--Table-colorSplit, #0000000f);
+  border-bottom: 1px solid var(--Table-colorSplit, #0000000f);
+  border-left: 1px solid var(--Table-colorSplit, #0000000f);
+}
+
+.ant-form-item-required::before {
+  content: none !important;
+}
+
+.ant-form-item-required::after {
+  content: '*' !important;
+  color: #ff4d4f !important;
+  font-size: 16px !important;
+  margin-right: 4px !important;
+  display: inline-block !important;
+}
+
+.css-dev-only-do-not-override-1a3rktk
+  .ant-form-vertical
+  .ant-form-item:not(.ant-form-item-horizontal)
+  .ant-form-item-label
+  > label::after,
+.css-dev-only-do-not-override-1a3rktk
+  .ant-form-vertical
+  .ant-form-item:not(.ant-form-item-horizontal)
+  .ant-col-24.ant-form-item-label
+  > label::after,
+.css-dev-only-do-not-override-1a3rktk
+  .ant-form-vertical
+  .ant-form-item:not(.ant-form-item-horizontal)
+  .ant-col-xl-24.ant-form-item-label
+  > label::after {
+  visibility: visible;
+}
+.css-dev-only-do-not-override-1a3rktk
+  .ant-form-vertical
+  .ant-form-item:not(.ant-form-item-horizontal)
+  .ant-form-item-label
+  > label::after {
+  content: none;
+}
+.ant-select-selection-item:hover {
+  color: #739fff !important;
+  font-weight: 400;
+}
+
+.ant-select-item-option-selected {
+  background-color: #f0f7ff !important;
+  color: #4a7cfe !important;
+  font-weight: 600;
+}
+
+.ant-checkbox-wrapper-checked {
+  background: var(--Transfer-controlItemBgHover, #f0f7ff);
+  border-radius: 4px;
+}
+
+/* hover 시 */
+.ant-checkbox-wrapper:hover {
+  background: var(--Transfer-controlItemBgHover, #0000000a);
+  border-radius: 4px;
+}

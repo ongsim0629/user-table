@@ -1,5 +1,5 @@
-import { FieldKey, FieldType } from '../../shared/constants/fields';
-import { JobOption } from '../../shared/constants/job';
+import { FieldKey, FieldType } from '../../../shared/constants/fields';
+import { JobOption } from '../../../shared/constants/job';
 
 export interface Field {
   key: FieldKey;
