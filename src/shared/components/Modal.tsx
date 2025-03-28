@@ -12,9 +12,10 @@ interface CustomModalProps {
   onClose: () => void;
   initialValues?: Member;
   editIndex?: number;
+  messageApi: string;
 }
 
-export default function CustomModal({ open, onClose, initialValues, editIndex }: CustomModalProps) {
+export default function CustomModal({ open, onClose, initialValues, editIndex, messageApi }: CustomModalProps) {
   const [disabled, setDisabled] = useState(true);
   const [form] = Form.useForm();
   const fields = getFields();
@@ -58,8 +59,10 @@ export default function CustomModal({ open, onClose, initialValues, editIndex }:
 
         if (editIndex !== undefined) {
           updateMember(editIndex, newMember);
+          messageApi.success('회원 정보가 수정되었습니다.');
         } else {
           addMember(newMember);
+          messageApi.success('회원이 성공적으로 추가되었습니다.');
         }
 
         form.resetFields();
@@ -124,17 +127,17 @@ export default function CustomModal({ open, onClose, initialValues, editIndex }:
 
   return (
     <Modal
-      title="회원 추가"
+      title={editIndex !== undefined ? '회원 수정' : '회원 추가'}
       open={open}
       onOk={handleSubmit}
       onCancel={() => {
         form.resetFields();
         onClose();
       }}
-      okText="추가"
+      okText={editIndex !== undefined ? '수정' : '추가'}
       cancelText="취소"
       okButtonProps={{ disabled }}
-      style={{ ...theme.modal }}
+      style={theme.modal}
       width={theme.modal.width}
       bodyStyle={theme.modal.body}
     >

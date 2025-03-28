@@ -1,7 +1,7 @@
-import { Dropdown, MenuProps } from 'antd';
+import { Dropdown, MenuProps, Modal, message } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import { theme } from '../styles/theme';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   onDelete: () => void;
@@ -12,6 +12,7 @@ interface Props {
 export function CustomDropdown({ onDelete, onEdit, disabled = false }: Props) {
   const [isPressed, setPressed] = useState(false);
   const [isHovered, setHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const iconStyle = {
     ...theme.dropdown.icon.base,
@@ -33,40 +34,65 @@ export function CustomDropdown({ onDelete, onEdit, disabled = false }: Props) {
   ];
 
   const handleClick: MenuProps['onClick'] = ({ key }) => {
-    if (key === 'delete') onDelete();
+    if (key === 'delete') {
+      setIsModalOpen(true);
+    }
     if (key === 'edit') onEdit();
   };
 
-  return (
-    <Dropdown
-      trigger={['click']}
-      menu={{ items, onClick: handleClick }}
+  const handleOk = () => {
+    onDelete();
+    message.success('항목이 삭제되었습니다.');
+    setIsModalOpen(false);
+  };
 
-      dropdownRender={(menu) => (
-        <div
-          style={{
-            width: theme.dropdown.width,
-            height: theme.dropdown.height,
-            padding: theme.dropdown.padding,
-            borderRadius: theme.dropdown.borderRadius,
-          }}
-        >
-          {menu}
-        </div>
-      )}
-    >
-      <span
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => {
-          setHovered(false);
-          setPressed(false);
-        }}
-        onMouseDown={() => setPressed(true)}
-        onMouseUp={() => setPressed(false)}
-        style={iconStyle}
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <>
+      <Dropdown
+        trigger={['click']}
+        menu={{ items, onClick: handleClick }}
+        dropdownRender={(menu) => (
+          <div
+            style={{
+              width: theme.dropdown.width,
+              height: theme.dropdown.height,
+              padding: theme.dropdown.padding,
+              borderRadius: theme.dropdown.borderRadius,
+            }}
+          >
+            {menu}
+          </div>
+        )}
       >
-        <MoreOutlined />
-      </span>
-    </Dropdown>
+        <span
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => {
+            setHovered(false);
+            setPressed(false);
+          }}
+          onMouseDown={() => setPressed(true)}
+          onMouseUp={() => setPressed(false)}
+          style={iconStyle}
+        >
+          <MoreOutlined />
+        </span>
+      </Dropdown>
+
+      <Modal
+        title="정말 삭제하시겠습니까?"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="삭제"
+        okType="danger"
+        cancelText="취소"
+      >
+        <p>삭제된 항목은 복구할 수 없습니다.</p>
+      </Modal>
+    </>
   );
 }
