@@ -1,0 +1,80 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+body {
+  font-family:
+    'Pretendard',
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    sans-serif;
+}
+
+.ant-table-wrapper td.ant-table-selection-column {
+  border-right: 1px solid var(--Table-colorSplit, #0000000f);
+  border-bottom: 1px solid var(--Table-colorSplit, #0000000f);
+  border-left: 1px solid var(--Table-colorSplit, #0000000f);
+}
+
+.ant-form-item-label > label.ant-form-item-required::before {
+  content: none !important;
+}
+
+/* 2) 대신 오른쪽에 별(*) 넣기 */
+.ant-form-item-label > label.ant-form-item-required::after {
+  content: '*' !important;
+  color: #ff4d4f; /* 빨간색 */
+  margin-left: 4px; /* 별과 텍스트 사이 간격 */
+  font-size: 14px; /* 원하는 크기 */
+  display: inline-block; /* 별이 정상적으로 표시되도록 */
+}
+
+.ant-select-arrow .anticon-down svg {
+  color: #000 !important;
+  transition: color 0.2s;
+}
+
+.ant-select:not(.ant-select-disabled):hover .ant-select-arrow .anticon-down svg {
+  color: #739fff !important;
+}
+
+.ant-select:hover .ant-select-suffix .anticon-down svg {
+  color: #739fff !important;
+}
+
+.ant-select:hover {
+  color: #739fff;
+}
+
+.label
+  .css-dev-only-do-not-override-1a3rktk
+  .ant-form-vertical
+  .ant-form-item:not(.ant-form-item-horizontal)
+  .ant-form-item-label
+  > label::after {
+  content: none;
+}
+.ant-select-selection-item:hover {
+  color: #739fff !important;
+  font-weight: 400;
+}
+
+.ant-select-item-option-selected {
+  background-color: #f0f7ff !important;
+  color: #4a7cfe !important;
+  font-weight: 600;
+}
+
+.ant-checkbox-wrapper-checked {
+  background: var(--Transfer-controlItemBgHover, #f0f7ff);
+  border-radius: 4px;
+}
+
+/* hover 시 */
+.ant-checkbox-wrapper:hover {
+  background: var(--Transfer-controlItemBgHover, #0000000a);
+  border-radius: 4px;
+}
